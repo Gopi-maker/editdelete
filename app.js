@@ -30,7 +30,7 @@ function addItem(e){
      li.appendChild(edit,edit.nextElementSibling);
     
      
-
+ localStorage.setItem(itm,itm);
 
    
 }
