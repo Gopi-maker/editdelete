@@ -28,9 +28,13 @@ function addItem(e){
      edit.className="btn btn-primary btn-sm float-right  edit";
      edit.appendChild(document.createTextNode("Edit"));
      li.appendChild(edit,edit.nextElementSibling);
-    
+    let user={
+        fname: itm,
+        lname: mti
+        
+    };
      
- localStorage.setItem(itm,itm);
+ localStorage.setItem(itm,JSON.stringify(user));
 
    
 }
