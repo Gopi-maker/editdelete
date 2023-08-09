@@ -5,49 +5,73 @@ var filter=document.getElementById("filter");
  filter.addEventListener("keyup",filterItem);
 
 list.addEventListener("click",removeItem);
+list.addEventListener("click",editItem);
 
 listen.addEventListener("click",addItem);
+
 function addItem(e){ 
     e.preventDefault();
-     var itm=document.getElementById("item").value;
-     var mti=document.getElementById("meti").value;
+    var fname=document.getElementById("item").value;
+    var lname=document.getElementById("meti").value;
+
       var li=document.createElement("li");
      li.className="list-group-item";
-    li.appendChild(document.createTextNode(itm));
-    li.appendChild(document.createTextNode(mti));
+    li.appendChild(document.createTextNode(fname));
+    li.appendChild(document.createTextNode(lname));
      list.appendChild(li);
     
      var buton=document.createElement("button");
      buton.className="btn btn-danger btn-sm float-right  delete";
+     buton.id="but";
      buton.appendChild(document.createTextNode("X"));
      li.appendChild(buton);
 
     
      var edit=document.createElement("button");
-     var lrt=document.querySelector(".list-group-item:nth-child(1)");
+    // var lrt=document.querySelector(".list-group-item:nth-child(1)");
      edit.className="btn btn-primary btn-sm float-right  edit";
      edit.appendChild(document.createTextNode("Edit"));
      li.appendChild(edit,edit.nextElementSibling);
-    let user={
-        fname: itm,
-        lname: mti
-        
-    };
      
- localStorage.setItem(itm,JSON.stringify(user));
+    var user={
+        fname,
+        lname
+    }
+     
+ localStorage.setItem(fname,JSON.stringify(user));
 
-   
 }
+   
+
+
 
 function removeItem(e){
     e.preventDefault();
+    var key=document.getElementById("item").value;
+    //const{fname}=user;
+    //localStorage.removeItem(key);
     if(e.target.classList.contains("delete")){
         if(confirm("Are You Sure?")){
             var ret=e.target.parentElement;
+            localStorage.removeItem(key);
             list.removeChild(ret);
+           //localStorage.removeItem(fname);
+            //list.removeChild(ret);
         }
 
     }
+
+
+}
+
+function editItem(e){
+    if(e.target.classList.contains("edit")){
+    var ret=e.target.parentElement;
+    list.removeChild(ret);
+    }
+    document.getElementById("item").value=user.fname;
+    document.getElementById("meti").value=user.lname;
+
 }
 
 function filterItem(e){
